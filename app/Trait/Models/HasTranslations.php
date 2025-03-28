@@ -68,4 +68,11 @@ trait HasTranslations
 
         return parent::setAttribute($key, $translations);
     }
+
+    public function scopeWhereTranslationLike($query, $field, $value, $locale = null)
+    {
+        $locale = $locale ?? app()->getLocale();
+
+        return $query->where("{$field}->{$locale}", 'like', "%{$value}%");
+    }
 }
