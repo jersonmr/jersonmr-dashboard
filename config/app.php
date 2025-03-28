@@ -78,6 +78,8 @@ return [
     |
     */
 
+    'available_languages' => ['en', 'es'],
+
     'available_locales' => [
         'es' => 'Español',
         'en' => 'English',
