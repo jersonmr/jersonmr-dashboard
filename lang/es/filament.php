@@ -5,6 +5,9 @@ return [
         'experience' => [
             'label' => 'Experiencias',
             'form' => [
+                'name' => [
+                    'label' => 'Nombre PEPE',
+                ],
                 'position' => [
                     'label' => 'Puesto',
                 ],
@@ -34,6 +37,9 @@ return [
                 'position' => [
                     'label' => 'Puesto',
                 ],
+                'company' => [
+                    'label' => 'Compañía    ',
+                ]
             ],
         ],
         'load_experiences' => 'Cargar experiencias',

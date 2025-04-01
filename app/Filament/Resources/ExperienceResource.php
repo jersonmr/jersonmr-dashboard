@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ExperienceResource\Pages;
 use App\Filament\Resources\ExperienceResource\RelationManagers;
+use App\Forms\Components\TranslatableField;
 use App\Models\Experience;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -84,7 +85,9 @@ class ExperienceResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('position')
-                    ->label(__('filament.resources.experience.table.position.label'))
+                    ->label(__('filament.resources.experience.table.position.label')),
+                Tables\Columns\TextColumn::make('company')
+                    ->label(__('filament.resources.experience.table.company.label')),
             ])
             ->filters([
                 //
