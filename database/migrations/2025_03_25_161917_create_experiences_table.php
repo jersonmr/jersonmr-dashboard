@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->foreignIdFor(User::class)->constrained('users')->cascadeOnDelete();
             $table->text('position');
             $table->string('company');
+            $table->string('company_url')->nullable();
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->boolean('is_freelance');
