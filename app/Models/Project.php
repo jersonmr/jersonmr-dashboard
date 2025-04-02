@@ -4,11 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Translatable\HasTranslations;
 
 class Project extends Model
 {
+    use HasTranslations;
+
+    public $translatable = ['title', 'description'];
+
     protected $fillable = [
         'user_id',
+        'is_active',
         'title',
         'description',
         'url',

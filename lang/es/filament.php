@@ -14,6 +14,9 @@ return [
                 'company' => [
                     'label' => 'Empresa',
                 ],
+                'company_url' => [
+                    'label' => 'Sitio web',
+                ],
                 'start_date' => [
                     'label' => 'Fecha de inicio',
                 ],
@@ -43,5 +46,54 @@ return [
             ],
         ],
         'load_experiences' => 'Cargar experiencias',
+        'projects' => [
+            'label' => 'Proyectos',
+            'form' => [
+                'user_id' => [
+                    'label' => 'Usuario',
+                ],
+                'is_active' => [
+                    'label' => 'Está activo',
+                ],
+                'title' => [
+                    'label' => 'Título',
+                ],
+                'description' => [
+                    'label' => 'Descripción',
+                ],
+                'url' => [
+                    'label' => 'URL del proyecto',
+                ],
+                'technologies' => [
+                    'label' => 'Tecnologías',
+                ],
+                'start_date' => [
+                    'label' => 'Fecha de inicio',
+                ],
+                'end_date' => [
+                    'label' => 'Fecha de finalización',
+                ],
+            ],
+            'table' => [
+                'title' => [
+                    'label' => 'Título',
+                ],
+                'user' => [
+                    'label' => 'Usuario',
+                ],
+                'is_active' => [
+                    'label' => 'Activo',
+                ],
+                'url' => [
+                    'label' => 'URL',
+                ],
+                'start_date' => [
+                    'label' => 'Fecha inicio',
+                ],
+                'end_date' => [
+                    'label' => 'Fecha fin',
+                ],
+            ],
+        ],
     ],
 ];

@@ -13,6 +13,7 @@ class Experience extends Model
         'user_id',
         'position',
         'company',
+        'company_url',
         'start_date',
         'end_date',
         'is_freelance',

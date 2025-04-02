@@ -3,8 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ExperienceResource\Pages;
-use App\Filament\Resources\ExperienceResource\RelationManagers;
-use App\Forms\Components\TranslatableField;
 use App\Models\Experience;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -12,8 +10,6 @@ use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ExperienceResource extends Resource
 {
@@ -42,12 +38,17 @@ class ExperienceResource extends Resource
                 Forms\Components\Toggle::make('is_freelance')
                     ->label(__('filament.resources.experience.form.is_freelancer.label'))
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('position')
-                    ->label(__('filament.resources.experience.form.position.label'))
-                    ->required(),
-                Forms\Components\TextInput::make('company')
-                    ->label(__('filament.resources.experience.form.company.label'))
-                    ->required(),
+                Forms\Components\Grid::make(3)
+                    ->schema([
+                        Forms\Components\TextInput::make('position')
+                            ->label(__('filament.resources.experience.form.position.label'))
+                            ->required(),
+                        Forms\Components\TextInput::make('company')
+                            ->label(__('filament.resources.experience.form.company.label'))
+                            ->required(),
+                        Forms\Components\TextInput::make('company_url')
+                            ->label(__('filament.resources.experience.form.company_url.label')),
+                    ]),
                 Forms\Components\Grid::make(4)
                     ->schema([
                         Forms\Components\DatePicker::make('start_date')
@@ -62,14 +63,14 @@ class ExperienceResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\TagsInput::make('technologies')
                     ->separator()
-//                    ->suggestions([
-//                        'tailwindcss',
-//                        'alpinejs',
-//                        'laravel',
-//                        'livewire',
-//                        'nestjs',
-//                        'filament',
-//                    ])
+                    //                    ->suggestions([
+                    //                        'tailwindcss',
+                    //                        'alpinejs',
+                    //                        'laravel',
+                    //                        'livewire',
+                    //                        'nestjs',
+                    //                        'filament',
+                    //                    ])
                     ->splitKeys(['Tab', ' '])
                     ->label(__('filament.resources.experience.form.technologies.label'))
                     ->required()
@@ -87,8 +88,12 @@ class ExperienceResource extends Resource
                 Tables\Columns\TextColumn::make('position')
                     ->label(__('filament.resources.experience.table.position.label')),
                 Tables\Columns\TextColumn::make('company')
-                    ->label(__('filament.resources.experience.table.company.label')),
+                    ->label(__('filament.resources.experience.table.company.label'))
             ])
+            //            ->recordUrl(
+            //                fn (Experience $record): string => $record->company_url ? URL::to($record->company_url) : "#",
+            //                shouldOpenInNewTab: true,
+            //            )
             ->filters([
                 //
             ])
