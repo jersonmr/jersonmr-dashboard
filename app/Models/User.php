@@ -3,14 +3,16 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Translatable\HasTranslations;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasTranslations;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +26,13 @@ class User extends Authenticatable
         'photo',
         'phone',
         'address',
+        'bio',
+        'github_url',
+        'x_url',
+        'linkedin_url',
     ];
+
+    public array $translatable = ['address', 'bio'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -46,6 +54,15 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'address' => 'json',
+            'bio' => 'json',
         ];
     }
+
+//    protected function photo(): Attribute
+//    {
+//        return Attribute::make(
+//            get: fn ($value) => $value ? (is_string($value) ? [$value] : $value) : [],
+//        );
+//    }
 }

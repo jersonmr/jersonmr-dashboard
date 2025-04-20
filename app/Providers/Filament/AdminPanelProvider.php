@@ -2,10 +2,13 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\ProfilePage;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
+use Filament\Navigation\UserMenuItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -58,6 +61,12 @@ class AdminPanelProvider extends PanelProvider
             ->plugin(
                 SpatieLaravelTranslatablePlugin::make()
                     ->defaultLocales(config('app.available_languages')),
-            );
+            )
+            ->userMenuItems([
+                MenuItem::make()
+                    ->label(__('filament.profile.label'))
+                    ->url(fn (): string => ProfilePage::getUrl())
+                    ->icon('heroicon-o-user'),
+            ]);
     }
 }

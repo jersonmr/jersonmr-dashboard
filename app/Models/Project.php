@@ -10,7 +10,7 @@ class Project extends Model
 {
     use HasTranslations;
 
-    public $translatable = ['title', 'description'];
+    public array $translatable = ['title', 'description'];
 
     protected $fillable = [
         'user_id',
