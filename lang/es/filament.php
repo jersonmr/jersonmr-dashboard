@@ -121,6 +121,7 @@ return [
         ],
         'actions' => [
             'update' => 'Actualizar perfil',
+            'generate-cv' => 'Generar CV',
         ],
         'title' => 'Información del Perfil',
         'description' => 'Actualiza la información de tu perfil y dirección de correo electrónico.',
@@ -141,6 +142,8 @@ return [
             'update' => [
                 'success' => 'Perfil actualizado',
             ],
-        ]
+        ],
+        'professional_experience' => 'Experiencia Profesional',
+        'projects' => 'Proyectos'
     ],
 ];

@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Translatable\HasTranslations;
@@ -59,10 +60,13 @@ class User extends Authenticatable
         ];
     }
 
-//    protected function photo(): Attribute
-//    {
-//        return Attribute::make(
-//            get: fn ($value) => $value ? (is_string($value) ? [$value] : $value) : [],
-//        );
-//    }
+    public function experiences(): HasMany
+    {
+        return $this->hasMany(Experience::class, 'user_id');
+    }
+
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class, 'user_id');
+    }
 }

@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProfilePage extends Page implements HasForms, HasActions
 {
@@ -163,5 +164,41 @@ class ProfilePage extends Page implements HasForms, HasActions
     protected function getFormModel(): Model|string|null
     {
         return \App\Models\User::class;
+    }
+
+    protected function getActions(): array
+    {
+        return [
+            Action::make('generate_cv')
+                ->label(__('filament.profile.actions.generate-cv'))
+                ->icon('heroicon-o-document-arrow-down')
+                ->action('generateCV'),
+        ];
+    }
+
+    public function generateCV(): \Symfony\Component\HttpFoundation\StreamedResponse
+    {
+        $user = User::with(['experiences', 'projects'])->find(Auth::user()->id);
+        $experiences = $user->experiences()->orderBy('start_date', 'desc')->get();
+        $projects = $user->projects()
+            ->where('is_active', true)
+            ->orderByDesc('id')
+            ->get();
+
+        $locale = $this->activeLocale ?? App::getLocale();
+        App::setLocale($locale);
+
+        $data = [
+            'user' => $user,
+            'experiences' => $experiences,
+            'projects' => $projects,
+            'locale' => $locale,
+        ];
+
+        $pdf = Pdf::loadView('pdf.cv', $data);
+
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->output();
+        }, $user->name . '_CV.pdf');
     }
 }
