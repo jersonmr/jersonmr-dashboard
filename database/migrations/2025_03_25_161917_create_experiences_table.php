@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->text('description');
             $table->string('technologies');
             $table->string('location')->nullable();
+            $table->boolean('visible')->default(true);
             $table->timestamps();
         });
 

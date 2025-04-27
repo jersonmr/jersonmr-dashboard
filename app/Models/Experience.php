@@ -20,6 +20,7 @@ class Experience extends Model
         'description',
         'technologies',
         'location',
+        'visible',
     ];
 
     protected array $translatable = [
